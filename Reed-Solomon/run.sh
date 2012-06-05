@@ -1,0 +1,1 @@
+scala -cp bin edu.jwang.reedsolomon.Simulation
