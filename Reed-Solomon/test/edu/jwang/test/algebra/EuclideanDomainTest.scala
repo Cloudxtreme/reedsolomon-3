@@ -8,7 +8,7 @@ import org.junit.Test
 import edu.jwang.algebra.EuclideanDomain
 import F13x.numbersToPoly
 
-class PolynomialGCDTest {
+class EuclideanDomainTest {
   @Test
   def testGCD() {
     val poly1: F13x = Vector(1, 5)

@@ -48,7 +48,7 @@ abstract class PolynomialRing[PR <: PolynomialRing[PR, R], R <: Ring[R]](_coeffs
    */
   def *(other: PR) = {
     if (isZero)
-      this.asInstanceOf[PR] // TODO
+      this.asInstanceOf[PR] // TODO is the cast avoidable?
     else if (other.isZero)
       other
     else {
@@ -93,7 +93,7 @@ abstract class PolynomialRing[PR <: PolynomialRing[PR, R], R <: Ring[R]](_coeffs
   /**
    * Pretty print this polynomial.
    */
-  override def toString() = {
+  override def toString = {
     val xPowStr = (0 to coeffs.size) map { i =>
       if (i == 0) "" else if (i == 1) "x" else "x^" + i
     }

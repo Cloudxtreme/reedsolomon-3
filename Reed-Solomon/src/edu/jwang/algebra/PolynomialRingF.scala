@@ -25,7 +25,8 @@ abstract class PolynomialRingF[PRF <: PolynomialRingF[PRF, F], F <: Field[F]](_c
       val z = this.asInstanceOf[PRF]
       (z, z)
     } else if (deg < other.deg)
-      (make(IndexedSeq()), this.asInstanceOf[PRF]) // TODO
+      // TODO is the cast avoidable?
+      (make(IndexedSeq()), this.asInstanceOf[PRF])
     else {
       // divide other into this polynomial's highest term
       // then recurse on the rest of the terms
@@ -35,7 +36,7 @@ abstract class PolynomialRingF[PRF <: PolynomialRingF[PRF, F], F <: Field[F]](_c
       // highest term in quotient
       val qCoeff = highest / other.coeffs.last
       val qPower = deg - other.deg
-      val zero = highest - highest // TODO
+      val zero = highest - highest
       val qTerm = make(IndexedSeq(qCoeff)).shift(qPower, zero)
 
       // divide the rest
