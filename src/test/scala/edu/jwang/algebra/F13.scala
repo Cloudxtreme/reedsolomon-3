@@ -1,7 +1,4 @@
-package edu.jwang.test.algebra
-
-import edu.jwang.algebra.PrimeField
-import edu.jwang.algebra.PolynomialRingF
+package edu.jwang.algebra
 
 case class F13(v: Int) extends PrimeField[F13](13, v) {
   def make(value: Int) = new F13(value)

@@ -1,11 +1,9 @@
-package edu.jwang.test.reedsolomon
+package edu.jwang.reedsolomon
+
+import org.junit.Assert.assertEquals
+import org.junit.Test
 
 import edu.jwang.algebra.PrimeField
-import edu.jwang.algebra.PolynomialRingF
-import org.junit.Test
-import org.junit.Assert._
-import edu.jwang.reedsolomon.ReedSolomon
-import edu.jwang.reedsolomon.GF32
 
 class ReedSolomonTest {
   case class F11(v: Int) extends PrimeField[F11](11, v) {

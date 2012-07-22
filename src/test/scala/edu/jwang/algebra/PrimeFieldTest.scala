@@ -1,9 +1,7 @@
-package edu.jwang.test.algebra
+package edu.jwang.algebra
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import edu.jwang.algebra.PrimeField
 
 class PrimeFieldTest {
   @Test

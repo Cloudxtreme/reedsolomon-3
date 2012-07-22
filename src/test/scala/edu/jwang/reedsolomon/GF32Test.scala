@@ -1,9 +1,8 @@
-package edu.jwang.test.reedsolomon
+package edu.jwang.reedsolomon
 
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Test
-import org.junit.Assert._
-
-import edu.jwang.reedsolomon.GF32
 
 class GF32Test {
   @Test

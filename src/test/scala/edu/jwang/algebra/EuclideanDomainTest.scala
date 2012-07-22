@@ -1,11 +1,10 @@
-package edu.jwang.test.algebra
+package edu.jwang.algebra
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Assert.assertFalse
 import org.junit.Test
 
-import edu.jwang.algebra.EuclideanDomain
 import F13x.numbersToPoly
 
 class EuclideanDomainTest {
