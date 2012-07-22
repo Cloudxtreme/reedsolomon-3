@@ -1,4 +1,4 @@
-package edu.jwang.reedsolomon
+package edu.jingw.reedsolomon
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse

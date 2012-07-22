@@ -1,4 +1,4 @@
-package edu.jwang.algebra
+package edu.jingw.algebra
 
 /**
  * The field of integers modulo ''p'', where ''p'' must be prime.

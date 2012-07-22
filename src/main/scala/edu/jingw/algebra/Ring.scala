@@ -1,4 +1,4 @@
-package edu.jwang.algebra
+package edu.jingw.algebra
 
 /**
  * A ring is an abelian group under addition and a monoid under multiplication.

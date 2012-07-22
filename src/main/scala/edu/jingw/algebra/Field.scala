@@ -1,4 +1,4 @@
-package edu.jwang.algebra
+package edu.jingw.algebra
 
 /**
  * A field is a commutative ring with multiplicative inverses. However, the

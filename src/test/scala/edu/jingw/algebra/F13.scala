@@ -1,4 +1,4 @@
-package edu.jwang.algebra
+package edu.jingw.algebra
 
 case class F13(v: Int) extends PrimeField[F13](13, v) {
   def make(value: Int) = new F13(value)

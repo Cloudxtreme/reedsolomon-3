@@ -1,4 +1,4 @@
-package edu.jwang.algebra
+package edu.jingw.algebra
 
 /**
  * A Euclidean domain is an integral domain with a norm function and division

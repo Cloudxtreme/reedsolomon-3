@@ -1,4 +1,4 @@
-package edu.jwang.algebra
+package edu.jingw.algebra
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

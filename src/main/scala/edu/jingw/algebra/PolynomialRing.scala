@@ -1,4 +1,4 @@
-package edu.jwang.algebra
+package edu.jingw.algebra
 
 /**
  * Polynomial ring over a ring ''R'', denoted ''R''[''x''].

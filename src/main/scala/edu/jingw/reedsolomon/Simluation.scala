@@ -1,4 +1,4 @@
-package edu.jwang.reedsolomon
+package edu.jingw.reedsolomon
 
 import java.io.PrintWriter
 import java.util.Random

@@ -1,9 +1,9 @@
-package edu.jwang.reedsolomon
+package edu.jingw.reedsolomon
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-import edu.jwang.algebra.PrimeField
+import edu.jingw.algebra.PrimeField
 
 class ReedSolomonTest {
   case class F11(v: Int) extends PrimeField[F11](11, v) {

@@ -1,4 +1,4 @@
-package edu.jwang.algebra
+package edu.jingw.algebra
 
 /**
  * A polynomial ring over a field ''F'', which forms a Euclidean domain.

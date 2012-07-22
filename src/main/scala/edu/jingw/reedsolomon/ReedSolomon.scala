@@ -1,8 +1,8 @@
-package edu.jwang.reedsolomon
+package edu.jingw.reedsolomon
 
-import edu.jwang.algebra.Field
-import edu.jwang.algebra.PolynomialRingF
-import edu.jwang.algebra.EuclideanDomain
+import edu.jingw.algebra.Field
+import edu.jingw.algebra.PolynomialRingF
+import edu.jingw.algebra.EuclideanDomain
 
 /**
  * Implements a (''n'', ''k'' = ''n'' - 2''t'') Reed-Solomon code over a finite

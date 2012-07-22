@@ -1,4 +1,4 @@
-package edu.jwang.algebra
+package edu.jingw.algebra
 
 /**
  * '''F''',,2,, = {0, 1}, the smallest field

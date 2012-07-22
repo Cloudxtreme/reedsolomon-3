@@ -1,6 +1,6 @@
-package edu.jwang.reedsolomon
+package edu.jingw.reedsolomon
 
-import edu.jwang.algebra._
+import edu.jingw.algebra.Field
 
 /**
  * Implements the Galois field ''GF''(2^5^) with irreducible polynomial
