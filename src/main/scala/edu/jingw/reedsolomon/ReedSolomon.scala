@@ -8,19 +8,20 @@ import edu.jingw.algebra.EuclideanDomain
  * Implements a (''n'', ''k'' = ''n'' - 2''t'') Reed-Solomon code over a finite
  * field ''F''.
  *
- * @tparam the finite field to operate over
+ * @tparam F the finite field to operate over
  * @constructor Create a new RS encoder/decoder with the given parameters
  * @param alpha a primitive element of ''F''
  * @param n the length of the codewords. This must be |''F''| - 1.
  * @param t the maximum number of errors to correct
- * @param zero the additive identity of ''F''
- * @param one the multiplicative identity of ''F''
  */
-class ReedSolomon[F <: Field[F]](val alpha: F, val n: Int, val t: Int, val zero: F, val one: F) {
+class ReedSolomon[F <: Field[F]](val alpha: F, val n: Int, val t: Int) {
   if (t < 0)
     throw new IllegalArgumentException("Need t >= 0")
   if ((alpha eq null) || alpha.isZero || alpha.isOne)
     throw new IllegalArgumentException("Invalid alpha")
+
+  private val zero = alpha - alpha
+  private val one = alpha / alpha
 
   /** List of nonzero field elements in the form (power of alpha, element) */
   private val fieldElems = (1 until n).foldLeft(List((0, one)))(

@@ -8,7 +8,7 @@ trait MultiplicativeGroup[G <: MultiplicativeGroup[G]]
   /**
    * Return the multiplicative inverse of this object.
    */
-  def inverse(): G
+  def inverse: G
 
   /**
    * Divide this element by another (compute `this/other`)

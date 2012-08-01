@@ -18,7 +18,7 @@ class ReedSolomonTest {
   @Test
   def testNoError() {
     val alpha = F11(2)
-    val rs = new ReedSolomon(alpha, 10, 2, F11(0), F11(1))
+    val rs = new ReedSolomon(alpha, 10, 2)
 
     val msg = Vector[F11](2, 1, 0, 4, 0, 3)
     val codeword = rs.encode(msg)
@@ -32,7 +32,7 @@ class ReedSolomonTest {
   @Test
   def testF11() {
     val alpha = F11(2)
-    val rs = new ReedSolomon(alpha, 10, 2, F11(0), F11(1))
+    val rs = new ReedSolomon(alpha, 10, 2)
 
     val msg = Vector[F11](2, 1, 0, 4, 0, 3)
     val originalCodeword = rs.encode(msg)
@@ -52,7 +52,7 @@ class ReedSolomonTest {
   def testGF32() {
     val msg = Vector[GF32]("00101", "00010", "10101", "11000", "10001", "10110", "10101", "10101", "00001", "10110", "00000", "10111", "10100", "01111", "00110", "00111", "11110", "00001", "00110", "00001", "01011", "10000", "01100", "01101", "00100")
     val errors = Vector[GF32]("01100").padTo(31, GF32.Zero)
-    val rs = new ReedSolomon(GF32.Alpha, 31, 3, GF32.Zero, GF32.One)
+    val rs = new ReedSolomon(GF32.Alpha, 31, 3)
     val codeword = rs.encode(msg)
     val corruptedCodeword = (codeword zip errors) map { t => t._1 + t._2 }
     val decodedMsg = rs.decode(corruptedCodeword)

@@ -18,7 +18,7 @@ object Simulation extends App {
 
   // for calculation of ps values
   // make uniform on log scale
-  val base = math.pow(MaxPs / MinPs, 1. / NumPsValues)
+  val base = math.pow(MaxPs / MinPs, 1d / NumPsValues)
   val constant = MinPs
 
   val psValues = (0 until NumPsValues) map { constant * math.pow(base, _) }
@@ -26,7 +26,7 @@ object Simulation extends App {
   for (t <- List(3, 7)) { // two different t
     printf("t = %d%n", t)
     val printWriter = new PrintWriter(t + ".csv")
-    val rs = new ReedSolomon(GF32.Alpha, 31, t, GF32.Zero, GF32.One)
+    val rs = new ReedSolomon(GF32.Alpha, 31, t)
 
     // parallel loop over all Ps
     psValues.par foreach { ps =>
@@ -58,12 +58,12 @@ object Simulation extends App {
       }
       printWriter.synchronized {
         printWriter.println("%f,%f,%d,%d".format(
-          ps, numFail / num.asInstanceOf[Double], numFail, numCorrect))
+          ps, numFail / num.toDouble, numFail, numCorrect))
       }
       //printf("Ps = %.5f%n", ps)
     }
     printWriter.close()
   }
 
-  printf("Time: %.1f s%n", (System.currentTimeMillis - executionStart) / 1000.)
+  printf("Time: %.1f s%n", (System.currentTimeMillis - executionStart) / 1000d)
 }

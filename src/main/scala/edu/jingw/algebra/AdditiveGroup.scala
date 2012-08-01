@@ -13,12 +13,12 @@ trait AdditiveGroup[G <: AdditiveGroup[G]] {
   /**
    * Return the additive inverse of this object.
    */
-  def unary_-(): G
+  def unary_- : G
 
   /**
    * Subtract the given element from this element (compute `this - other`).
    */
-  def -(other: G) = this + -other;
+  def -(other: G) = this + -other
 
   /**
    * Return `true` if this is the additive identity.

@@ -49,17 +49,17 @@ class PolynomialRingTest {
   def testMultiplication() {
     val a: F13x = Vector(0, 10, 12, 3, 10, 10)
     val b: F13x = Vector(10, 9, 11, 12)
-    val expected: F13x = Vector(0, 9, 2, 1, 2, 3, 2, 9, 3);
-    assertEquals(expected, a * b);
-    assertEquals(expected, b * a);
+    val expected: F13x = Vector(0, 9, 2, 1, 2, 3, 2, 9, 3)
+    assertEquals(expected, a * b)
+    assertEquals(expected, b * a)
   }
 
   @Test
   def testMultiplicationZero() {
     val a: F13x = Vector()
     val b: F13x = Vector(10, 9, 11, 12)
-    val expected: F13x = a;
-    assertEquals(expected, a * b);
-    assertEquals(expected, b * a);
+    val expected: F13x = a
+    assertEquals(expected, a * b)
+    assertEquals(expected, b * a)
   }
 }
