@@ -14,7 +14,7 @@ class EuclideanDomainTest {
     val poly2: F13x = Vector(10, 12, -1)
     val (s, t) = EuclideanDomain.extendedGcd(poly1, poly2)
     val gcd = s * poly1 + t * poly2
-    assertEquals(gcd.deg, 0)
+    assertEquals(0, gcd.deg)
     assertFalse(gcd.isZero)
   }
 

@@ -1,7 +1,8 @@
 package edu.jingw.reedsolomon
 
+import scala.util.Random
+
 import java.io.PrintWriter
-import java.util.Random
 
 /**
  * Simulate transmission of RS codewords over a noisy channel to determine the
@@ -14,7 +15,6 @@ object Simulation extends App {
   val MaxNumTrials = 10000
   val MinFail = 100
   val MinCorrect = 100
-  val rnd = new Random
 
   // for calculation of ps values
   // make uniform on log scale
@@ -29,7 +29,7 @@ object Simulation extends App {
     val rs = new ReedSolomon(GF32.Alpha, 31, t)
 
     // parallel loop over all Ps
-    psValues.par foreach { ps =>
+    for (ps <- psValues.par) {
       var numFail = 0
       var numCorrect = 0
       var num = 0
@@ -38,14 +38,14 @@ object Simulation extends App {
         && (numFail < MinFail || numCorrect < MinCorrect)) {
         // This generates different random numbers, not just the same thing
         // filled over and over
-        val msg = Vector.fill(rs.k)(GF32(rnd.nextInt(32)))
+        val msg = Vector.fill(rs.k)(GF32(Random.nextInt(32)))
         val codeword = rs.encode(msg)
         val errors = Vector.fill(rs.n)(
-          if (rnd.nextDouble() < ps) GF32(rnd.nextInt(31) + 1)
+          if (Random.nextDouble() < ps) GF32(Random.nextInt(31) + 1)
           else GF32.Zero)
         val numErrors = errors.count(!_.isZero)
 
-        val corruptedCodeword = (codeword zip errors) map { t => t._1 + t._2 }
+        val corruptedCodeword = (codeword zip errors) map Function.tupled { _ + _ }
 
         val decodedMsg = rs.decode(corruptedCodeword)
         if (decodedMsg == null || decodedMsg != msg) {
@@ -56,10 +56,8 @@ object Simulation extends App {
           numCorrect += 1
         num += 1
       }
-      printWriter.synchronized {
-        printWriter.println("%f,%f,%d,%d".format(
-          ps, numFail / num.toDouble, numFail, numCorrect))
-      }
+      printWriter.println("%f,%f,%d,%d".format(
+        ps, numFail / num.toDouble, numFail, numCorrect))
       //printf("Ps = %.5f%n", ps)
     }
     printWriter.close()

@@ -25,7 +25,7 @@ class ReedSolomon[F <: Field[F]](val alpha: F, val n: Int, val t: Int) {
 
   /** List of nonzero field elements in the form (power of alpha, element) */
   private val fieldElems = (1 until n).foldLeft(List((0, one)))(
-    (elemList, i) => (i, elemList.head._2 * alpha) +: elemList)
+    (elemList, i) => (i, elemList.head._2 * alpha) :: elemList)
 
   /** Polynomial ring over ''F'' */
   private case class PolyF(c: IndexedSeq[F]) extends PolynomialRingF[PolyF, F](c) {
@@ -103,8 +103,6 @@ class ReedSolomon[F <: Field[F]](val alpha: F, val n: Int, val t: Int) {
       val xr = PolyF(Vector(one)).shift(r, zero)
       val (si, ti) = EuclideanDomain.extendedGcd(xr, syndromePoly, t)
       val ri = si * xr + ti * syndromePoly
-      //println(ri)
-      //println(ti)
 
       val omega = ri
       val lambda = ti // error locator polynomial
@@ -115,18 +113,12 @@ class ReedSolomon[F <: Field[F]](val alpha: F, val n: Int, val t: Int) {
         null // decoding failure
       else {
         val locations = rootPairs map { t => (n - t._1) % n }
-        //println(locations)
-
         val errors = forney(rootPairs, omega, lambda)
 
-        //println(errors)
-
-        val errorMonomials = (errors zip locations) map
-          { t => PolyF(Vector(t._1)).shift(t._2, zero) }
+        val errorMonomials = (errors zip locations) map Function.tupled
+          { (err, loc) => PolyF(Vector(err)).shift(loc, zero) }
         val errorPoly = errorMonomials.reduce(_ + _)
         val corrected = recv - errorPoly
-        //println(errorPoly)
-        //println(corrected)
         corrected.coeffs.padTo(n, zero)
       }
     }

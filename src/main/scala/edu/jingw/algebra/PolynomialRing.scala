@@ -7,7 +7,7 @@ package edu.jingw.algebra
  * @param _coeffs coefficients on ''x^i^'', starting with the constant term
  */
 abstract class PolynomialRing[PR <: PolynomialRing[PR, R], R <: Ring[R]](_coeffs: IndexedSeq[R])
-  extends Ring[PR] {
+  extends Ring[PR] with Function[R, R] {
 
   /** Coefficients, excluding trailing zeros */
   val coeffs = reduce(_coeffs)
@@ -29,7 +29,7 @@ abstract class PolynomialRing[PR <: PolynomialRing[PR, R], R <: Ring[R]](_coeffs
    * Standard polynomial addition, term by term.
    */
   def +(other: PR) = {
-    val common = (coeffs zip other.coeffs) map { tup => tup._1 + tup._2 }
+    val common = (coeffs zip other.coeffs) map Function.tupled { _ + _ }
     val sizeDiff = coeffs.size - other.coeffs.size
     make(
       if (sizeDiff > 0)
@@ -61,7 +61,7 @@ abstract class PolynomialRing[PR <: PolynomialRing[PR, R], R <: Ring[R]](_coeffs
         val c1 = coeffs.slice(start, end + 1)
         val c2 = other.coeffs.slice(i - end, i - start + 1).reverse
         // add together
-        (c1 zip c2) map { t => t._1 * t._2 } reduce { _ + _ }
+        (c1 zip c2) map Function.tupled { _ * _ } reduce { _ + _ }
       }
       make(resultCoeffs)
     }
@@ -88,12 +88,12 @@ abstract class PolynomialRing[PR <: PolynomialRing[PR, R], R <: Ring[R]](_coeffs
    * The formal derivative of this polynomial.
    */
   def derivative = make(coeffs.drop(1).zipWithIndex map
-    { t => t._1.additivePow(t._2 + 1) })
+    Function.tupled { (a, n) => a.additivePow(n + 1) })
 
   /**
    * Pretty print this polynomial.
    */
-  override def toString = {
+  override def toString() = {
     val xPowStr = (0 to coeffs.size) map { i =>
       if (i == 0) "" else if (i == 1) "x" else "x^" + i
     }
@@ -102,8 +102,7 @@ abstract class PolynomialRing[PR <: PolynomialRing[PR, R], R <: Ring[R]](_coeffs
       else if (r.isOne) ""
       else r.toString
     }
-    val combined = rStr zip xPowStr map { tup =>
-      val (r, x) = tup
+    val combined = rStr zip xPowStr map Function.tupled { (r, x) =>
       if (r eq null) null
       else if (r == "" && x == "") "1"
       else r + x
