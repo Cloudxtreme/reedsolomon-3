@@ -2,7 +2,7 @@ name := "Reed-Solomon ECC"
 
 //version := "1.0"
 
-organization := "edu.jwang"
+organization := "edu.jingw"
 
 scalaVersion := "2.9.2"
 
