@@ -62,4 +62,28 @@ class PolynomialRingTest {
     assertEquals(expected, a * b)
     assertEquals(expected, b * a)
   }
+
+  @Test
+  def testToString() {
+    val f: F13x = Vector(10, 9, 11, 12)
+    assertEquals("12x^3 + 11x^2 + 9x + 10", f.toString())
+  }
+
+  @Test
+  def testToStringZero() {
+    val f: F13x = Vector()
+    assertEquals("0", f.toString())
+  }
+
+  @Test
+  def testToStringOne() {
+    val f: F13x = Vector(1)
+    assertEquals("1", f.toString())
+  }
+
+  @Test
+  def testToStringMixed() {
+    val f: F13x = Vector(0, 1, 2, 0, 1, 2, 0)
+    assertEquals("2x^5 + x^4 + 2x^2 + x", f.toString())
+  }
 }
