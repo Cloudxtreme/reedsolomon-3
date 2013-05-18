@@ -24,7 +24,7 @@ class ReedSolomonTest {
     assertEquals(expected, codeword)
 
     val decoded = rs.decode(codeword)
-    assertEquals(msg, decoded)
+    assertEquals(Some(msg), decoded)
   }
 
   @Test
@@ -41,7 +41,7 @@ class ReedSolomonTest {
     val corruptedCodeword = (originalCodeword zip errors) map Function.tupled { _ + _ }
 
     val decoded = rs.decode(corruptedCodeword)
-    assertEquals(msg, decoded)
+    assertEquals(Some(msg), decoded)
   }
 
   @Test
@@ -57,6 +57,6 @@ class ReedSolomonTest {
     val codeword = rs.encode(msg)
     val corruptedCodeword = (codeword zip errors) map Function.tupled { _ + _ }
     val decodedMsg = rs.decode(corruptedCodeword)
-    assertEquals(msg, decodedMsg)
+    assertEquals(Some(msg), decodedMsg)
   }
 }

@@ -98,21 +98,22 @@ abstract class PolynomialRing[PR <: PolynomialRing[PR, R], R <: Ring[R]](_coeffs
       if (i == 0) "" else if (i == 1) "x" else "x^" + i
     }
     val rStr = coeffs map { r =>
-      if (r.isZero) null
-      else if (r.isOne) ""
-      else r.toString
+      if (r.isZero) None
+      else if (r.isOne) Some("")
+      else Some(r.toString)
     }
-    val combined = rStr zip xPowStr map Function.tupled { (r, x) =>
-      if (r eq null) null
-      else if (r == "" && x == "") "1"
-      else r + x
+    val combined = rStr zip xPowStr flatMap {
+      case (None, x) => None
+      case (Some(r), x) => Some(
+        if (r == "" && x == "") "1"
+        else r + x
+      )
     }
-    val filtered = combined filter { _ ne null }
 
-    if (filtered.size == 0)
+    if (combined.size == 0)
       "0"
     else
-      filtered.reverse.mkString(" + ")
+      combined.reverse.mkString(" + ")
   }
 
   /**

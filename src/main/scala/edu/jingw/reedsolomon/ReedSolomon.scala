@@ -74,21 +74,17 @@ class ReedSolomon[F <: Field[F]](val alpha: F, val n: Int, val t: Int) {
    * Decode the given received symbols using the parameters given at
    * construction time, returning the message.
    * @param recvSeq a length ''n'' sequence of field elements
-   * @return the decoded length ''k'' message, or `null` if decoding failed
+   * @return the decoded length ''k'' message, or `None` if decoding failed
    */
-  def decode(recvSeq: IndexedSeq[F]) = {
-    val dec = decodeCodeword(recvSeq)
-    if (dec == null)
-      null
-    else
-      dec.takeRight(k) // take just the message bits
-  }
+  def decode(recvSeq: IndexedSeq[F]) =
+    // take just the message bits
+    decodeCodeword(recvSeq).map(_.takeRight(k))
 
   /**
    * Decode the given received symbols using the parameters given at
    * construction time, returning the codeword.
    * @param recvSeq a length ''n'' sequence of field elements
-   * @return the corrected length ''n'' codeword, or `null` if decoding failed
+   * @return the corrected length ''n'' codeword, or `None` if decoding failed
    */
   def decodeCodeword(recvSeq: IndexedSeq[F]) = {
     if (recvSeq.length != n)
@@ -98,7 +94,7 @@ class ReedSolomon[F <: Field[F]](val alpha: F, val n: Int, val t: Int) {
     val syndromePoly = syndrome(recv)
 
     if (syndromePoly.isZero)
-      recvSeq // no errors, return as is
+      Some(recvSeq) // no errors, return as is
     else {
       val xr = PolyF(Vector(one)).shift(r, zero)
       val (si, ti) = EuclideanDomain.extendedGcd(xr, syndromePoly, t)
@@ -110,7 +106,7 @@ class ReedSolomon[F <: Field[F]](val alpha: F, val n: Int, val t: Int) {
       val rootPairs = chienSearch(lambda)
 
       if (rootPairs.length != lambda.deg)
-        null // decoding failure
+        None // decoding failure
       else {
         val locations = rootPairs map { t => (n - t._1) % n }
         val errors = forney(rootPairs, omega, lambda)
@@ -119,7 +115,7 @@ class ReedSolomon[F <: Field[F]](val alpha: F, val n: Int, val t: Int) {
           { (err, loc) => PolyF(Vector(err)).shift(loc, zero) }
         val errorPoly = errorMonomials.reduce(_ + _)
         val corrected = recv - errorPoly
-        corrected.coeffs.padTo(n, zero)
+        Some(corrected.coeffs.padTo(n, zero))
       }
     }
   }

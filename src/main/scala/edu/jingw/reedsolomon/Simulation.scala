@@ -48,7 +48,7 @@ object Simulation extends App {
         val corruptedCodeword = (codeword zip errors) map Function.tupled { _ + _ }
 
         val decodedMsg = rs.decode(corruptedCodeword)
-        if (decodedMsg == null || decodedMsg != msg) {
+        if (decodedMsg.getOrElse(None) != msg) {
           if (numErrors <= t) // should have been able to correct
             throw new AssertionError
           numFail += 1

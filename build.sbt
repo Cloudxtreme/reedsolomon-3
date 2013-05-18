@@ -4,10 +4,10 @@ name := "Reed-Solomon ECC"
 
 organization := "edu.jingw"
 
-scalaVersion := "2.9.2"
+scalaVersion := "2.10.0"
 
 scalacOptions ++= Seq("-deprecation", "-unchecked")
 
 libraryDependencies += "com.novocode" % "junit-interface" % "0.8" % "test->default"
 
-libraryDependencies += "junit" % "junit" % "4.10" % "test"
+libraryDependencies += "junit" % "junit" % "4.11" % "test"
