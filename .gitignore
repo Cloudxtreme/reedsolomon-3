@@ -1,10 +1,11 @@
 /bin/
 /.cache
 /.classpath
-/.project
-/.settings
 *.csv
-project/
-target/
-/.idea/
 *.iml
+/.idea/
+/.project
+project/
+/.scala_dependencies
+/.settings
+target/
