@@ -4,7 +4,7 @@ name := "Reed-Solomon ECC"
 
 organization := "edu.jingw"
 
-scalaVersion := "2.10.0"
+scalaVersion := "2.10.3"
 
 scalacOptions ++= Seq("-deprecation", "-unchecked")
 
