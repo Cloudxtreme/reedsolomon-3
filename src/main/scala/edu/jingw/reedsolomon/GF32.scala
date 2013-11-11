@@ -6,7 +6,7 @@ import edu.jingw.algebra.Field
  * Implements the Galois field ''GF''(2^5^) with irreducible polynomial
  * ''α''^5^ + ''α''^2^ + 1.
  */
-case class GF32(vector: Int) extends Field[GF32] {
+case class GF32(vector: Int) extends Field[GF32] with NotNull {
   if (vector < 0 || vector > 31)
     // might be better to do reduction instead
     throw new IllegalArgumentException("out of range")

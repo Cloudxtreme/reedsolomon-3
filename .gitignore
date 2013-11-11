@@ -2,8 +2,8 @@
 /.cache
 /.classpath
 *.csv
-*.iml
 /.idea/
+*.iml
 /.project
 /.scala_dependencies
 /.settings

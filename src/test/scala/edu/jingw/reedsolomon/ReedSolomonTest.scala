@@ -1,5 +1,7 @@
 package edu.jingw.reedsolomon
 
+import scala.language.implicitConversions
+
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

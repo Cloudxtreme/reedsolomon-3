@@ -5,7 +5,7 @@ package edu.jingw.algebra
  */
 abstract class PolynomialRingF[PRF <: PolynomialRingF[PRF, F], F <: Field[F]](_coeffs: IndexedSeq[F])
   extends PolynomialRing[PRF, F](_coeffs)
-  with EuclideanDomain[PRF] {
+  with EuclideanDomain[PRF] with NotNull {
 
   def norm = deg
 

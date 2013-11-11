@@ -3,7 +3,7 @@ package edu.jingw.algebra
 /**
  * '''F''',,2,, = {0, 1}, the smallest field
  */
-abstract class BinaryField extends Field[BinaryField] {
+abstract class BinaryField extends Field[BinaryField] with NotNull {
   def unary_- = this
 
   /** Multiplicative identity */

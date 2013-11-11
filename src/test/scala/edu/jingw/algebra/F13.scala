@@ -1,6 +1,8 @@
 package edu.jingw.algebra
 
-case class F13(v: Int) extends PrimeField[F13](13, v) {
+import scala.language.implicitConversions
+
+case class F13(v: Int) extends PrimeField[F13](13, v) with NotNull {
   def make(value: Int) = new F13(value)
 }
 case class F13x(c: IndexedSeq[F13]) extends PolynomialRingF[F13x, F13](c) {

@@ -7,7 +7,7 @@ package edu.jingw.algebra
  * @param _coeffs coefficients on ''x^i^'', starting with the constant term
  */
 abstract class PolynomialRing[PR <: PolynomialRing[PR, R], R <: Ring[R]](_coeffs: IndexedSeq[R])
-  extends Ring[PR] with Function[R, R] {
+  extends Ring[PR] with Function[R, R] with NotNull {
 
   /** Coefficients, excluding trailing zeros */
   val coeffs = reduce(_coeffs)

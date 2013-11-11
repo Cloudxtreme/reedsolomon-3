@@ -8,7 +8,7 @@ package edu.jingw.algebra
  * @param _value integer value, which will be reduced mod `modulus`
  */
 abstract class PrimeField[F <: PrimeField[F]](modulus: Int, _value: Int)
-  extends Field[F] {
+  extends Field[F] with NotNull {
   val value = ((_value % modulus) + modulus) % modulus
 
   def make(value: Int): F
