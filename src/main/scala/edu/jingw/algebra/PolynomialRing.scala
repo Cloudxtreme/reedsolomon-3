@@ -126,4 +126,6 @@ abstract class PolynomialRing[PR <: PolynomialRing[PR, R], R <: Ring[R]](_coeffs
     case other: PR => coeffs == other.coeffs
     case _ => false
   }
+
+  override def hashCode() = coeffs.hashCode()
 }
