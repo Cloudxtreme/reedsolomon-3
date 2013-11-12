@@ -7,9 +7,7 @@ import edu.jingw.algebra.Field
  * ''α''^5^ + ''α''^2^ + 1.
  */
 case class GF32(vector: Int) extends Field[GF32] with NotNull {
-  if (vector < 0 || vector > 31)
-    // might be better to do reduction instead
-    throw new IllegalArgumentException("out of range")
+  require(vector >= 0 && vector < 32, "out of range")
 
   def +(other: GF32) = GF32(vector ^ other.vector)
 

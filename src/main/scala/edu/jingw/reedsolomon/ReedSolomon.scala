@@ -15,10 +15,9 @@ import edu.jingw.algebra.EuclideanDomain
  * @param t the maximum number of errors to correct
  */
 class ReedSolomon[F <: Field[F]](val alpha: F, val n: Int, val t: Int) {
-  if (t < 0)
-    throw new IllegalArgumentException("Need t >= 0")
-  if ((alpha eq null) || alpha.isZero || alpha.isOne)
-    throw new IllegalArgumentException("Invalid alpha")
+  require(t >= 0, "Need t >= 0")
+  require(!alpha.isZero, "Invalid alpha = 0")
+  require(!alpha.isOne, "Invalid alpha = 1")
 
   private val zero = alpha - alpha
   private val one = alpha / alpha
@@ -26,6 +25,8 @@ class ReedSolomon[F <: Field[F]](val alpha: F, val n: Int, val t: Int) {
   /** List of nonzero field elements in the form (power of alpha, element) */
   private val fieldElems = (1 until n).foldLeft(List((0, one)))(
     (elemList, i) => (i, elemList.head._2 * alpha) :: elemList)
+  require(fieldElems.map(_._2).distinct.size == n, "Invalid n, multiplication by α wrapped")
+  require(fieldElems.head._2 * alpha == one, "α^n should be one")
 
   /** Polynomial ring over ''F'' */
   private case class PolyF(c: IndexedSeq[F]) extends PolynomialRingF[PolyF, F](c) {
@@ -58,8 +59,7 @@ class ReedSolomon[F <: Field[F]](val alpha: F, val n: Int, val t: Int) {
    * @return the encoded message with the original message bits at the end
    */
   def encode(msg: IndexedSeq[F]) = {
-    if (msg.length != k)
-      throw new IllegalArgumentException("msg length should be k")
+    require(msg.length == k, s"msg length was ${msg.length}, not k=$k")
 
     val m = PolyF(msg)
     val xr = PolyF(Vector(one)).shift(r, zero)
@@ -87,8 +87,7 @@ class ReedSolomon[F <: Field[F]](val alpha: F, val n: Int, val t: Int) {
    * @return the corrected length ''n'' codeword, or `None` if decoding failed
    */
   def decodeCodeword(recvSeq: IndexedSeq[F]) = {
-    if (recvSeq.length != n)
-      throw new IllegalArgumentException("recvSeq length should be n")
+    require(recvSeq.length == n, s"recvSeq length was ${recvSeq.length}, not n=$n")
 
     val recv = PolyF(recvSeq)
     val syndromePoly = syndrome(recv)

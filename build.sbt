@@ -13,9 +13,8 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "org.scalacheck" %% "scalacheck" % "1.11.0" % "test",
-  "com.novocode" % "junit-interface" % "0.8" % "test->default",
-  "junit" % "junit" % "4.11" % "test"
+  "org.scalacheck" %% "scalacheck" % "1.10.1" % "test",
+  "org.scalatest" % "scalatest_2.10" % "2.0" % "test"
 )
 
 org.scalastyle.sbt.ScalastylePlugin.Settings
