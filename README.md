@@ -5,6 +5,7 @@ This project implements a Reed-Solomon error correction code over arbitrary fini
 
 Building and Running
 ====================
+[![Build Status](https://travis-ci.org/jingw/reedsolomon.png)](https://travis-ci.org/jingw/reedsolomon)
 
 We use `sbt` for building.
 
