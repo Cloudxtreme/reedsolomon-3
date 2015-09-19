@@ -6,6 +6,7 @@ This project implements a Reed-Solomon error correction code over arbitrary fini
 Building and Running
 ====================
 [![Build Status](https://travis-ci.org/jingw/reedsolomon.png)](https://travis-ci.org/jingw/reedsolomon)
+[![codecov.io](http://codecov.io/github/jingw/reedsolomon/coverage.svg?branch=master)](http://codecov.io/github/jingw/reedsolomon?branch=master)
 
 We use `sbt` for building.
 
